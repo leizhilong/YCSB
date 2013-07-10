@@ -46,7 +46,8 @@
     <maven.assembly.version>2.2.1</maven.assembly.version>
     <hbase.version>0.92.1</hbase.version>
     <cassandra.version>0.7.0</cassandra.version>
-    <infinispan.version>7.1.0.Final</infinispan.version>
+    <infinispan.version>7.2.0.Final</infinispan.version>
+    <infinispan.hotrod.version>5.3.0.Final</infinispan.hotrod.version>
     <openjpa.jdbc.version>2.1.1</openjpa.jdbc.version>
     <mapkeeper.version>1.0</mapkeeper.version>
     <mongodb.version>2.9.0</mongodb.version>
@@ -76,6 +77,7 @@
     <module>redis</module>
     <!--<module>voldemort</module>-->
     <module>distribution</module>
+    <module>infinispan-hotrod-binding</module>
   </modules>
 
   <build>
