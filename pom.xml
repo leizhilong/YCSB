@@ -69,6 +69,8 @@
     <!--<module>elasticsearch</module>-->
     <!--<module>gemfire</module>-->
     <module>infinispan</module>
+    <module>infinispan-hotrod-binding</module>
+    <module>memcached-bingding</module>
     <module>jdbc</module>
     <!--<module>mapkeeper</module>-->
     <!--<module>mongodb</module>-->
@@ -77,8 +79,7 @@
     <module>redis</module>
     <!--<module>voldemort</module>-->
     <module>distribution</module>
-    <module>infinispan-hotrod-binding</module>
-    <module>memcached-bingding</module>
+
   </modules>
 
   <build>
