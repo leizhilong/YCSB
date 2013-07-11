@@ -1,0 +1,1 @@
+./bin/ycsb load hotrod -P workloads/workloada 

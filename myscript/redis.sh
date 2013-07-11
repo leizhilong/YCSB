@@ -1,0 +1,1 @@
+./bin/ycsb load redis -P workloads/workloada 

@@ -18,6 +18,14 @@
       </includes>
     </fileSet>
     <fileSet>
+      <directory>../myscript</directory>
+      <outputDirectory>.</outputDirectory>
+      <fileMode>0755</fileMode>
+      <includes>
+        <include>*.sh</include>
+      </includes>
+    </fileSet>
+    <fileSet>
       <directory>../bin</directory>
       <outputDirectory>bin</outputDirectory>
       <fileMode>0755</fileMode>

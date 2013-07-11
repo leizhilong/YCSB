@@ -1,0 +1,1 @@
+./bin/ycsb load memcached -P workloads/workloada 

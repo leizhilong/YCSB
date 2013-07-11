@@ -1,0 +1,1 @@
+./bin/ycsb load infinispan -P workloads/workloada 
