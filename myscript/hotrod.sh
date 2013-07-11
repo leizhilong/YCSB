@@ -1,1 +1,1 @@
-./bin/ycsb load hotrod -P workloads/workloada 
+./bin/ycsb load infinispan-hotrod -P workloads/workloada 
