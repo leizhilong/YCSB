@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.internal.GetFuture;
@@ -68,51 +69,6 @@ public abstract class MemcachedCompatibleClient extends DB {
 
     protected abstract MemcachedClient createMemcachedClient() throws Exception;
     
-    public int read(String table, String key, Set<String> fields, Map<String, ByteIterator> result) {
-        try {
-            GetFuture<Object> future = client.asyncGet(createQualifiedKey(table, key));
-            Object document = future.get();
-            if (document != null) {
-                fromJson((String) document, fields, result);
-            }
-            return OK;
-        } catch (Exception e) {
-            if (log.isErrorEnabled()) {
-                log.error("Error encountered", e);
-            }
-            return ERROR;
-        }
-    }
-    
-    public int scan(String table, String startKey, int limit, Set<String> fields, List<Map<String, ByteIterator>> result) {
-        throw new IllegalStateException("Range scan is not supported");
-    }
-    
-    public int update(String table, String key, Map<String, ByteIterator> values) {
-        key = createQualifiedKey(table, key);
-        try {
-            OperationFuture<Boolean> future = client.replace(key, objectExpirationTime, toJson(values));
-            return getReturnCode(future);
-        } catch (Exception e) {
-            if (log.isErrorEnabled()) {
-                log.error("Error updating value with key: " + key, e);
-            }
-            return ERROR;
-        }
-    }
-    
-    public int insert(String table, String key, Map<String, ByteIterator> values) {
-        key = createQualifiedKey(table, key);
-        try {
-            OperationFuture<Boolean> future = client.add(key, objectExpirationTime, toJson(values));
-            return getReturnCode(future);
-        } catch (Exception e) {
-            if (log.isErrorEnabled()) {
-                log.error("Error inserting value", e);
-            }
-            return ERROR;
-        }
-    }
 
     public int delete(String table, String key) {
         key = createQualifiedKey(table, key);
@@ -174,4 +130,63 @@ public abstract class MemcachedCompatibleClient extends DB {
         MAPPER.writeTree(jsonGenerator, node);
         return writer.toString();
     }
+    
+    
+    
+	@Override
+	public int read(String table, String key, Set<String> fields,
+			HashMap<String, ByteIterator> result) {
+		try {
+			GetFuture<Object> future = client.asyncGet(createQualifiedKey(
+					table, key));
+			Object document = future.get();
+			if (document != null) {
+				fromJson((String) document, fields, result);
+			}
+			return OK;
+		} catch (Exception e) {
+			if (log.isErrorEnabled()) {
+				log.error("Error encountered", e);
+			}
+			return ERROR;
+		}
+	}
+
+	@Override
+	public int scan(String table, String startkey, int recordcount,
+			Set<String> fields, Vector<HashMap<String, ByteIterator>> result) {
+		throw new IllegalStateException("Range scan is not supported");
+	}
+
+	@Override
+	public int update(String table, String key,
+			HashMap<String, ByteIterator> values) {
+		key = createQualifiedKey(table, key);
+		try {
+			OperationFuture<Boolean> future = client.replace(key,
+					objectExpirationTime, toJson(values));
+			return getReturnCode(future);
+		} catch (Exception e) {
+			if (log.isErrorEnabled()) {
+				log.error("Error updating value with key: " + key, e);
+			}
+			return ERROR;
+		}
+	}
+
+	@Override
+	public int insert(String table, String key,
+			HashMap<String, ByteIterator> values) {
+		key = createQualifiedKey(table, key);
+		try {
+			OperationFuture<Boolean> future = client.add(key,
+					objectExpirationTime, toJson(values));
+			return getReturnCode(future);
+		} catch (Exception e) {
+			if (log.isErrorEnabled()) {
+				log.error("Error inserting value", e);
+			}
+			return ERROR;
+		}
+	}
 }

@@ -1,15 +1,10 @@
 package com.yahoo.ycsb.memcached;
 
-import net.spy.memcached.ConnectionFactoryBuilder;
-
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.Vector;
 
-import com.yahoo.ycsb.ByteIterator;
+import net.spy.memcached.ConnectionFactoryBuilder;
 
 public class MemcachedClient extends MemcachedCompatibleClient {
 
@@ -37,6 +32,4 @@ public class MemcachedClient extends MemcachedCompatibleClient {
         }
         return new net.spy.memcached.MemcachedClient(connectionFactoryBuilder.build(), addresses);
     }
-
-	
 }
