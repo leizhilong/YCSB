@@ -4,16 +4,19 @@ import net.spy.memcached.ConnectionFactoryBuilder;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
+
+import com.yahoo.ycsb.ByteIterator;
 
 public class MemcachedClient extends MemcachedCompatibleClient {
 
-    @Override
     protected MemcachedCompatibleConfig createMemcachedConfig() {
         return new MemcachedConfig(getProperties());
     }
 
-    @Override
     protected net.spy.memcached.MemcachedClient createMemcachedClient() throws Exception {
         ConnectionFactoryBuilder connectionFactoryBuilder = new ConnectionFactoryBuilder();
 
@@ -34,4 +37,6 @@ public class MemcachedClient extends MemcachedCompatibleClient {
         }
         return new net.spy.memcached.MemcachedClient(connectionFactoryBuilder.build(), addresses);
     }
+
+	
 }

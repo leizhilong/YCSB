@@ -1,12 +1,21 @@
 package com.yahoo.ycsb.memcached;
 
-import com.yahoo.ycsb.ByteIterator;
-import com.yahoo.ycsb.DB;
-import com.yahoo.ycsb.DBException;
-import com.yahoo.ycsb.StringByteIterator;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.internal.GetFuture;
 import net.spy.memcached.internal.OperationFuture;
+
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonNode;
@@ -15,15 +24,16 @@ import org.codehaus.jackson.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.text.MessageFormat;
-import java.util.*;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import com.yahoo.ycsb.ByteIterator;
+import com.yahoo.ycsb.DB;
+import com.yahoo.ycsb.DBException;
+import com.yahoo.ycsb.StringByteIterator;
 
 public abstract class MemcachedCompatibleClient extends DB {
+	
+	private static final int OK = 0;
+	private static final int ERROR = -1;
+	private static final int NOT_FOUND = -2;
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -57,8 +67,7 @@ public abstract class MemcachedCompatibleClient extends DB {
     protected abstract MemcachedCompatibleConfig createMemcachedConfig();
 
     protected abstract MemcachedClient createMemcachedClient() throws Exception;
-
-    @Override
+    
     public int read(String table, String key, Set<String> fields, Map<String, ByteIterator> result) {
         try {
             GetFuture<Object> future = client.asyncGet(createQualifiedKey(table, key));
@@ -74,13 +83,11 @@ public abstract class MemcachedCompatibleClient extends DB {
             return ERROR;
         }
     }
-
-    @Override
+    
     public int scan(String table, String startKey, int limit, Set<String> fields, List<Map<String, ByteIterator>> result) {
         throw new IllegalStateException("Range scan is not supported");
     }
-
-    @Override
+    
     public int update(String table, String key, Map<String, ByteIterator> values) {
         key = createQualifiedKey(table, key);
         try {
@@ -93,8 +100,7 @@ public abstract class MemcachedCompatibleClient extends DB {
             return ERROR;
         }
     }
-
-    @Override
+    
     public int insert(String table, String key, Map<String, ByteIterator> values) {
         key = createQualifiedKey(table, key);
         try {
@@ -108,7 +114,6 @@ public abstract class MemcachedCompatibleClient extends DB {
         }
     }
 
-    @Override
     public int delete(String table, String key) {
         key = createQualifiedKey(table, key);
         try {
