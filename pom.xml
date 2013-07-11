@@ -78,6 +78,7 @@
     <!--<module>voldemort</module>-->
     <module>distribution</module>
     <module>infinispan-hotrod-binding</module>
+    <module>memcached-bingding</module>
   </modules>
 
   <build>
