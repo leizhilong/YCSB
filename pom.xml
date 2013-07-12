@@ -71,7 +71,7 @@
     <module>infinispan</module>
     <module>infinispan-hotrod-binding</module>
     <module>memcached-bingding</module>
-    <module>jdbc</module>
+    <!--<module>jdbc</module> -->
     <!--<module>mapkeeper</module>-->
     <!--<module>mongodb</module>-->
     <!--<module>orientdb</module>-->
