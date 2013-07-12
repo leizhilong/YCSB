@@ -126,6 +126,7 @@ public class InfinispanHotRodClient extends DB {
 
 			return OK;
 		} catch (Exception e) {
+			logger.error(e);
 			return ERROR;
 		}
 	}
