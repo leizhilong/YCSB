@@ -1,1 +1,1 @@
-./bin/ycsb load memcached -P workloads/workloada 
+./bin/ycsb load memcached -P workloads/workloada -p memcached.hosts=172.17.254.231:11212

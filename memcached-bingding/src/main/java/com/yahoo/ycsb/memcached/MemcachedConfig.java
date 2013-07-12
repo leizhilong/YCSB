@@ -21,7 +21,8 @@ public class MemcachedConfig extends PropertiesConfig implements MemcachedCompat
 
     public static final String CHECK_OPERATION_STATUS_PROPERTY = "memcached.checkOperationStatus";
 
-    public static final boolean CHECK_OPERATION_STATUS_DEFAULT = true;
+    /** shoudn't be boolean, otherwise this will be a parameter indicating that whether memcached.checkOperationStatus is required!  */
+    public static final String CHECK_OPERATION_STATUS_DEFAULT = "true";
 
     public static final long DEFAULT_OP_TIMEOUT = 60000;
 
