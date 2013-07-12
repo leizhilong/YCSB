@@ -43,7 +43,7 @@ public class InfinispanHotRodClient extends DB {
 
 	public void init() throws DBException {
 		try {
-			infinispanManager = new RemoteCacheManager("infinispan-config.xml");
+			infinispanManager = new RemoteCacheManager(true);
 		} catch (HotRodClientException e) {
 			throw new DBException(e);
 		}
