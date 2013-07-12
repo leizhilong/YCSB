@@ -1,1 +1,2 @@
-./bin/ycsb load redis -P workloads/workloada 
+./env.sh
+./bin/ycsb load redis -P $WORKLOAD

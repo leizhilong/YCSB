@@ -1,1 +1,2 @@
-./bin/ycsb load infinispan -P workloads/workloada 
+./env.sh
+./bin/ycsb load infinispan -P $WORKLOAD
