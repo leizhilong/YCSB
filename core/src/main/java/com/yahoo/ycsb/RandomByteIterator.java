@@ -20,7 +20,9 @@ package com.yahoo.ycsb;
  *  A ByteIterator that generates a random sequence of bytes.
  */
 public class RandomByteIterator extends ByteIterator {
-  private long len;
+
+	private static final long serialVersionUID = -1189852180057797372L;
+private long len;
   private long off;
   private int bufOff;
   private byte[] buf;

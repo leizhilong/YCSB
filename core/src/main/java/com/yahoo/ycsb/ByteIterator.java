@@ -16,8 +16,8 @@
  */
 package com.yahoo.ycsb;
 
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.ArrayList;
 /**
  * YCSB-specific buffer class.  ByteIterators are designed to support
  * efficient field generation, and to allow backend drivers that can stream
@@ -42,8 +42,10 @@ import java.util.ArrayList;
  *
  * @author sears
  */
-public abstract class ByteIterator implements Iterator<Byte> {
+public abstract class ByteIterator implements Iterator<Byte>, Serializable {
 
+	private static final long serialVersionUID = -3212956763680536825L;
+	
 	@Override
 	public abstract boolean hasNext();
 
