@@ -186,6 +186,7 @@ public abstract class MemcachedCompatibleClient extends DB {
 			if (log.isErrorEnabled()) {
 				log.error("Error inserting value", e);
 			}
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
