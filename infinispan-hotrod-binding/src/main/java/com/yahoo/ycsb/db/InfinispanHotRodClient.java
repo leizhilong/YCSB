@@ -126,7 +126,8 @@ public class InfinispanHotRodClient extends DB {
 
 			return OK;
 		} catch (Exception e) {
-			System.out.print(e.getStackTrace());
+			System.out.println("ERROR:" + e.getMessage());
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
