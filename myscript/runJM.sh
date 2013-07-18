@@ -32,7 +32,24 @@ export NUM=150
 jdg-mem.sh
 
 
-sleep 3
+sleep 1
 export TS=`date +%Y%m%d-%H.%M.%S`
 export NUM=200
+jdg-mem.sh
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=500
+jdg-mem.sh
+
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=1000
+jdg-mem.sh
+
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=2000
 jdg-mem.sh

@@ -36,3 +36,20 @@ sleep 3
 export TS=`date +%Y%m%d-%H.%M.%S`
 export NUM=200
 memcached.sh
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=500
+memcached.sh
+
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=1000
+memcached.sh
+
+
+sleep 1
+export TS=`date +%Y%m%d-%H.%M.%S`
+export NUM=2000
+memcached.sh
