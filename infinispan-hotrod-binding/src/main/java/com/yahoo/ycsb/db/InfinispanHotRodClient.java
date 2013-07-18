@@ -11,9 +11,11 @@ import org.infinispan.client.hotrod.exceptions.HotRodClientException;
 import org.infinispan.util.logging.Log;
 import org.infinispan.util.logging.LogFactory;
 
+import com.yahoo.ycsb.ByteArrayByteIterator;
 import com.yahoo.ycsb.ByteIterator;
 import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.DBException;
+import com.yahoo.ycsb.RandomByteIterator;
 import com.yahoo.ycsb.StringByteIterator;
 
 /**
@@ -70,7 +72,14 @@ public class InfinispanHotRodClient extends DB {
 			if (row != null) {
 				result.clear();
 				if (fields == null || fields.isEmpty()) {
-					StringByteIterator.putAllAsByteIterators(result, row);
+//					StringByteIterator.putAllAsByteIterators(result, row);
+					for (String s : row.keySet()) {
+						String value = row.get(s); 
+						if( value != null ) {
+							result.put(s, new ByteArrayByteIterator( value.getBytes()));
+						}
+					}
+
 				} else {
 					for (String field : fields)
 						result.put(field,
