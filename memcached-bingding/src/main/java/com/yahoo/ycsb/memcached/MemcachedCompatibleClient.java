@@ -79,6 +79,7 @@ public abstract class MemcachedCompatibleClient extends DB {
             if (log.isErrorEnabled()) {
                 log.error("Error deleting value", e);
             }
+            e.printStackTrace();
             return ERROR;
         }
     }
@@ -148,6 +149,7 @@ public abstract class MemcachedCompatibleClient extends DB {
 			if (log.isErrorEnabled()) {
 				log.error("Error encountered", e);
 			}
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
@@ -170,6 +172,7 @@ public abstract class MemcachedCompatibleClient extends DB {
 			if (log.isErrorEnabled()) {
 				log.error("Error updating value with key: " + key, e);
 			}
+			e.printStackTrace();
 			return ERROR;
 		}
 	}

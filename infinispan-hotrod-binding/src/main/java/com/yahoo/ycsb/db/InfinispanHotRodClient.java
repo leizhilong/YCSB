@@ -79,6 +79,7 @@ public class InfinispanHotRodClient extends DB {
 			}
 			return OK;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
@@ -109,6 +110,7 @@ public class InfinispanHotRodClient extends DB {
 
 			return OK;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
@@ -126,7 +128,6 @@ public class InfinispanHotRodClient extends DB {
 
 			return OK;
 		} catch (Exception e) {
-			System.out.println("ERROR:" + e.getMessage());
 			e.printStackTrace();
 			return ERROR;
 		}
@@ -141,6 +142,7 @@ public class InfinispanHotRodClient extends DB {
 				infinispanManager.getCache(table).remove(key);
 			return OK;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ERROR;
 		}
 	}
