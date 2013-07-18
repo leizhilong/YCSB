@@ -59,13 +59,13 @@ public class InfinispanHotRodClient extends DB {
 	public int read(String table, String key, Set<String> fields,
 			HashMap<String, ByteIterator> result) {
 		try {
-			Map<String, String> row;
+			Map<String, ByteIterator> row;
 			// if (clustered) {
 			// row =
 			// AtomicMapLookup.getAtomicMap(infinispanManager.getCache(table),
 			// key, false);
 			// } else {
-			RemoteCache<String, Map<String, String>> cache = infinispanManager
+			RemoteCache<String, Map<String, ByteIterator>> cache = infinispanManager
 					.getCache(table);
 			row = cache.get(key);
 			// }
@@ -73,17 +73,11 @@ public class InfinispanHotRodClient extends DB {
 				result.clear();
 				if (fields == null || fields.isEmpty()) {
 //					StringByteIterator.putAllAsByteIterators(result, row);
-					for (String s : row.keySet()) {
-						String value = row.get(s); 
-						if( value != null ) {
-							result.put(s, new ByteArrayByteIterator( value.getBytes()));
-						}
-					}
+					result.putAll(row);
 
 				} else {
 					for (String field : fields)
-						result.put(field,
-								new StringByteIterator(row.get(field)));
+						result.put(field, row.get(field));
 				}
 			}
 			return OK;
